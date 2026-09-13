@@ -5,19 +5,19 @@ import matplotlib.pyplot as plt
 def add_border(img, border_width, border_val):
     h, w = img.shape
     
-    # Create left and right border arrays
+    # Creating left and right border arrays
     left_border = np.full((h, border_width), border_val, dtype=np.uint8)
     right_border = np.full((h, border_width), border_val, dtype=np.uint8)
     
-    # Combine horizontally: left + image + right
+    # Combining horizontally: left + image + right
     middle = np.hstack((left_border, img, right_border))
     
-    # Create top and bottom border arrays for the new width
+    # Creating top and bottom border arrays for the new width
     new_w = w + 2 * border_width
     top_border = np.full((border_width, new_w), border_val, dtype=np.uint8)
     bottom_border = np.full((border_width, new_w), border_val, dtype=np.uint8)
     
-    # Combine vertically: top + middle + bottom
+    # Combining vertically: top + middle + bottom
     padded_img = np.vstack((top_border, middle, bottom_border))
     
     return padded_img
@@ -57,7 +57,7 @@ def main():
     # Process Grayscale
     padded_gray = add_border(img_gray, border_width, border_val_gray)
     
-    # Convert original to binary (using simple threshold for demonstration)
+    # Converting original to binary (using simple threshold for demonstration)
     # Using 127 as default threshold
     _, img_binary = cv2.threshold(img_gray, 127, 255, cv2.THRESH_BINARY)
     
