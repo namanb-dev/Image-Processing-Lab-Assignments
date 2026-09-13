@@ -6,16 +6,16 @@ def main():
     print("Assignment 2: RGB to Grayscale")
     image_path = input("Enter image path (default: /content/image.png): ") or "/content/image.png"
     
-    # 1. Load RGB color image (OpenCV reads in BGR)
+    # 1. Loading RGB color image (OpenCV reads in BGR)
     img_bgr = cv2.imread(image_path)
     if img_bgr is None:
         print("Image could not be loaded. Check the file path.")
         return
         
-    # 3. Convert BGR to RGB
+    # 3. Converting BGR to RGB
     img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
     
-    # 4. Separate planes
+    # 4. Separating planes
     R = img_rgb[:, :, 0].astype(np.float32)
     G = img_rgb[:, :, 1].astype(np.float32)
     B = img_rgb[:, :, 2].astype(np.float32)
@@ -32,7 +32,7 @@ def main():
             wG = float(input("Weight for G (e.g., 0.2): "))
             wB = float(input("Weight for B (e.g., 0.1): "))
             
-            # 8. Validate
+            # 8. Validating
             if 0 <= wR <= 1 and 0 <= wG <= 1 and 0 <= wB <= 1:
                 if abs((wR + wG + wB) - 1.0) < 1e-5:
                     break
@@ -45,11 +45,11 @@ def main():
             
     print(f"\nEntered Weights -> R: {wR}, G: {wG}, B: {wB}")
     
-    # 9. Use weighted formula
+    # 9. Using weighted formula
     gray_case2 = wR * R + wG * G + wB * B
     gray_case2 = np.clip(gray_case2, 0, 255).astype(np.uint8)
     
-    # 6. Display original, planes, and grayscale result (Case 1)
+    # 6. Displaying original, planes, and grayscale result (Case 1)
     plt.figure(figsize=(15, 8))
     
     plt.subplot(2, 3, 1)
@@ -58,7 +58,7 @@ def main():
     plt.axis("off")
     
     plt.subplot(2, 3, 2)
-    # Display R plane as grayscale to show intensity
+    # Displaying R plane as grayscale to show intensity
     plt.imshow(R.astype(np.uint8), cmap="gray")
     plt.title("R Plane")
     plt.axis("off")
@@ -78,7 +78,7 @@ def main():
     plt.title("Case 1: Mean Average Grayscale")
     plt.axis("off")
     
-    # 10. Display weighted grayscale result (Case 2)
+    # 10. Displaying weighted grayscale result (Case 2)
     plt.subplot(2, 3, 6)
     plt.imshow(gray_case2, cmap="gray")
     plt.title(f"Case 2: Weighted (R={wR}, G={wG}, B={wB})")
