@@ -81,7 +81,7 @@ def main():
         print("Image could not be loaded. Check the file path.")
         return
         
-    # Convert BGR to RGB for correct plotting if color
+    # Converting BGR to RGB for correct plotting if color
     if len(img.shape) == 3:
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         
